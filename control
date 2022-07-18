@@ -1,0 +1,10 @@
+Package: emt.paisseon.cowsay
+Name: cowsay but it's in C
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: title
+Maintainer: Paisseon
+Author: Paisseon
+Conflicts: cowsay
+Section: System
+Tag: role::hacker
