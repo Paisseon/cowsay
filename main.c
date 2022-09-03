@@ -1,9 +1,18 @@
 #include <stdio.h>
 #include <string.h>
 
+void horizontal_border(int top, int len, int wCt) {
+    printf("%s", top == 0 ? "┌" : "└");
+    
+    for (int i = (wCt <= 1) ? -2 : -1; i < len; ++i)
+        printf("%s", "─");
+    
+    printf("%s\n", top == 0 ? "┐" : "┘");
+}
+
 int main(int argc, const char *argv[]) {
-    int len, wCt = 0;
-    char str[1000], *tmp[1000], line[42];
+    int len = 0, lCt = 0, wCt = 0;
+    char str[5000], *tmp[5000], line[42];
     
     if (argc == 1)
         return -1;
@@ -19,28 +28,26 @@ int main(int argc, const char *argv[]) {
     
     // Get array of all words
     
-    for (char *token = strtok(str, " "); token != NULL; token = strtok(NULL, " ")) {
-        tmp[wCt] = token;
-        wCt++;
-    }
+    for (char *token = strtok(str, " "); token != NULL; token = strtok(NULL, " "))
+        tmp[wCt++] = token;
     
     char *words[wCt];
     
-    for (int i = 0; i < wCt; ++i) {
+    for (int i = 0; i < wCt; ++i)
         words[i] = tmp[i];
-    }
     
     // Get the box width
     
     for (int i = 0; i < wCt; ++i) {
         strcpy(line, words[i]);
+        lCt++;
         
         for (int a = i + 1; a < wCt; ++a) {
             strcat(line, " ");
             strcat(line, words[a]);
             
-            if ((strlen(line) + strlen(words[a])) > len && (strlen(line) + strlen(words[a])) < 42) {
-                len = (strlen(line) + strlen(words[a]));
+            if (((strlen(line) + strlen(words[a])) > len) && ((strlen(line) + strlen(words[a]) + 3) <= 42)) {
+                len = (strlen(line) + 1);
                 i++;
             } else {
                 break;
@@ -52,11 +59,7 @@ int main(int argc, const char *argv[]) {
     
     // Display the top row
     
-    printf("%s", "┌");
-    for (int i = -2; i < len; ++i) {
-        printf("%s", "─");
-    }
-    printf("%s\n", "┐");
+    horizontal_border(0, len, wCt);
     
     // Display the input message
     
@@ -74,19 +77,16 @@ int main(int argc, const char *argv[]) {
         }
         
         printf("│ %s", line);
-        for (int n = 0; n < (len - strlen(line)); ++n) {
+        
+        for (int n = 0; wCt > 1 && n < (len - strlen(line) - 1); ++n)
             printf("%s", " ");
-        }
+        
         printf("%s", " │\n");
     }
     
     // Display the bottom row
     
-    printf("%s", "└");
-    for (int i = -2; i < len; ++i) {
-        printf("%s", "─");
-    }
-    printf("%s\n", "┘");
+    horizontal_border(1, len, wCt);
     
     // Display the cow
     

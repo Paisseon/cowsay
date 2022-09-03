@@ -1,10 +1,13 @@
 Package: emt.paisseon.cowsay
-Name: cowsay but it's in C
-Version: 0.0.1
+Name: cowsay
+Version: 0.0.2
 Architecture: iphoneos-arm
-Description: title
+Description: Cowsay but it's written in C
 Maintainer: Paisseon
 Author: Paisseon
 Conflicts: cowsay
 Section: System
+Icon: https://paisseon.github.io/icons/cowsay.png
+SileoDepiction: https://paisseon.github.io/depictions/cowsay.json
+Depiction: https://pinpal.github.io/Sileo-Depiction-WebViews/?json=https://paisseon.github.io/depictions/cowsay.json&name=Cowsay&dev=Paisseon
 Tag: role::hacker
